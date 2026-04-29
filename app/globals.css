@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Global Design System Tokens */
+  --color-bg-primary-bg: var(--bg-primary-bg);
+  --color-bg-secondary-bg: var(--bg-secondary-bg);
+  
+  --color-text-primary-text: var(--text-primary-text);
+  --color-text-secondary-text: var(--text-secondary-text);
+  --color-text-muted-text: var(--text-muted-text);
+  
+  --color-text-brand-primary: var(--text-brand-primary);
+  --color-text-brand-secondary: var(--text-brand-secondary);
+  --color-bg-brand-primary: var(--bg-brand-primary);
+  --color-bg-brand-secondary: var(--bg-brand-secondary);
+  
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
+  /* Spacing System (Strict) */
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Border Radius System (Strict) */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+
+  /* Typography Scale */
+  --font-size-h1: 2.25rem; /* 4xl */
+  --font-size-h2: 1.5rem;  /* 2xl */
+  --font-size-h3: 1.25rem; /* xl */
+  --font-size-h4: 1.125rem; /* lg */
+  --font-size-h5: 1rem;    /* base */
+  --font-size-h6: 0.875rem; /* sm */
+
+  /* Additional Reference Colors */
+  --color-tertiary: #d0bcff;
+  --color-surface-container: #1c1f2b;
+  --color-on-surface-variant: #c7c4d8;
+  --color-primary-fixed-dim: #c3c0ff;
 }
 
+:root {
+  /* Background tokens */
+  --bg-primary-bg: #060914;
+  --bg-secondary-bg: #10131e;
+  
+  /* Text tokens */
+  --text-primary-text: #e0e1f2;
+  --text-secondary-text: #c7c4d8;
+  --text-muted-text: #918fa1;
+  
+  /* Brand tokens */
+  --text-brand-primary: #c3c0ff;
+  --text-brand-secondary: #4cd7f6;
+  --bg-brand-primary: #4f46e5;
+  --bg-brand-secondary: #03b5d3;
+  
+  /* State tokens */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Custom fonts and other variables */
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+}
+
+/* Dark mode (Mandatory - though design is dark) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-primary-bg: #060914;
+    --bg-secondary-bg: #0a0e19;
+    --text-primary-text: #f0f1ff;
+    --text-secondary-text: #d1d4e5;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary-bg);
+  color: var(--text-primary-text);
+  font-family: var(--font-space-grotesk);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Design System Utilities */
+.h1 { @apply text-4xl font-semibold; }
+.h2 { @apply text-2xl font-semibold; }
+.h3 { @apply text-xl font-semibold; }
+.h4 { @apply text-lg font-medium; }
+.h5 { @apply text-base font-medium; }
+.h6 { @apply text-sm font-medium; }
+.p { @apply text-base font-normal; }
+
+/* Custom Effects from Reference */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neon-glow-indigo {
+  filter: drop-shadow(0 0 10px rgba(195, 192, 255, 0.4));
+}
+
+.neon-glow-cyan {
+  filter: drop-shadow(0 0 10px rgba(76, 215, 246, 0.4));
+}
+
+.pulse-glow {
+  box-shadow: 0 0 0 0 rgba(195, 192, 255, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(195, 192, 255, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(195, 192, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(195, 192, 255, 0); }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #c3c0ff, #4cd7f6, #d0bcff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
